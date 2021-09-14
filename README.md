@@ -522,7 +522,7 @@ Traditionally, LandTrendr is run over an image collection with a single LandTren
 		
 	5. Check data at download destination. 
 
-		./LTOP_Oregon/rasters/01_SNIC/
+		./LTOP_Oregon/rasters/04_LTOP_Image_NBR/
 
 ## Valdation
 
@@ -531,3 +531,37 @@ LandTrendr data-set. The validation well be carried out by using the LTOP (LandT
 referance data to the classification of a NLCD dataset. This classification meathod will also be conducted with the 
 traditional LandTrendr dataset. Then the two classified images will be compared to the source 
 NLCD to see which, if any, have better performance.   
+
+#### 1 Generate Triditional LandTrendr Run with four indices TCB TCG TCW NBR
+
+	1. script local location
+
+		./LTOP_Oregon/scripts/GEEjs/10_get_LandTrendr_fitted_data.js
+
+	2. copy and paste script into GEE console 
+	
+	2. Make sure you all needed dependencies 
+
+	3. Review in script parameters.
+
+	4. Run script
+
+	5. Run tasks
+
+		task to assets
+
+			LandTrendr_orig_oregon_nbr_tcbtcgtcwnbr.tif
+
+		task to drive 
+
+			/LandTrendr_Orig_Oregon_NBR_tcbtcgtcwnbr/
+
+		task to drive 
+
+			/LandTrendr_Orig_Oregon_NBR_tcbtcgtcwnbr/
+ 
+#### 2 Generate LTOP in other indices TCW TCG TCB NBR
+
+#### 3 Generate sample of points to sample both LTOP and LT
+
+#### 4 Sample each data-set LTOP and LT separately creating two vector data-set samples (each sample set will be a part of the training data for each classification) 
