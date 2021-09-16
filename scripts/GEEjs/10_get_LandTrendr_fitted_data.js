@@ -1,6 +1,6 @@
 
 
-//var aoi = ee.FeatureCollection("TIGER/2018/States").filterMetadata("NAME","equals","Oregon").geometry().buffer(5000);
+var aoi = ee.FeatureCollection("TIGER/2018/States").filterMetadata("NAME","equals","Oregon").geometry().buffer(5000);
 
 var startYear = 1999;
 var endYear = 2020;
