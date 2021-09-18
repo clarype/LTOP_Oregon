@@ -9,7 +9,7 @@ var endDay = "09-10";
 var maskThese = ['water','snow','shadow'];
 var exclude = {};
 var index = "NBR" ;
-var ftvList = ['TCB','TCG','TCW','NBR'];
+var ftvList = ['TCB','TCG','TCW','NBR', 'B5'];
 
 
 var runParams = { 
@@ -39,7 +39,7 @@ var getFittedData_NBR_NBR = ltgee.getFittedData(lt, startYear, endYear, "NBR", f
 var getFittedData_NBR_TCB = ltgee.getFittedData(lt, startYear, endYear, "TCB", ftvList)
 var getFittedData_NBR_TCG = ltgee.getFittedData(lt, startYear, endYear, "TCG", ftvList)
 var getFittedData_NBR_TCW = ltgee.getFittedData(lt, startYear, endYear, "TCW", ftvList)
-
+var getFittedData_NBR_B5 = ltgee.getFittedData(lt, startYear, endYear, "B5", ftvList)
 // //good
 // var makeRGBcomposite = ltgee.makeRGBcomposite(index, startYear, endYear, startDay, endDay, 2000, 2005, 2010, aoi,runParams, 2.5, maskThese, exclude)
 
@@ -127,6 +127,26 @@ Export.image.toAsset({
   crs:'EPSG:5070',
   maxPixels:1e13
 });
+Export.image.toDrive({
+  image:getFittedData_NBR_B5,
+  region:aoi, 
+  scale:30,
+  description:'LandTrendr_orig_oregon_nbr_B5',
+  folder:'LandTrendr_Orig_Oregon_NBR_B5',
+  fileNamePrefix:'ltop_',
+  crs:'EPSG:5070',
+  maxPixels:1e13
+});
+
+Export.image.toAsset({
+  image:getFittedData_NBR_B5,
+  region:aoi, 
+  scale:30,
+  description:'LandTrendr_orig_oregon_nbr_B5',
+  crs:'EPSG:5070',
+  maxPixels:1e13
+});
+
 
 var runInfo = ee.Dictionary({
   'featureCollection': "TIGER/2018/States", 
@@ -143,7 +163,7 @@ var runInfo = ee.Dictionary({
 var runInfo = ee.FeatureCollection(ee.Feature(null, runInfo));
 Export.table.toDrive({
   collection: runInfo,
-  description: 'LandTrendr_orig_oregon_nbr_tcbtcgtcwnbr_Info',
+  description: 'LandTrendr_orig_oregon_nbr_tcbtcgtcwnbrb5_Info',
   folder: "LandTrendr_Orig_Oregon_NBR_NBR",
   fileNamePrefix: 'runInfo',
   fileFormat: 'GeoJSON'

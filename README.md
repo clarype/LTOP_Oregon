@@ -548,19 +548,26 @@ NLCD to see which, if any, have better performance.
 
 	5. Run tasks
 
-		task to assets
+		there are 9 task 4 go to assets and 5 go to the drive. They come down to make and be sampled by points
 
-			LandTrendr_orig_oregon_nbr_tcbtcgtcwnbr.tif
 
-		task to drive 
-
-			/LandTrendr_Orig_Oregon_NBR_tcbtcgtcwnbr/
-
-		task to drive 
-
-			/LandTrendr_Orig_Oregon_NBR_tcbtcgtcwnbr/
- 
+  
 #### 2 Generate LTOP in other indices TCW TCG TCB NBR
+
+	1) script location
+
+		./LTOP_Oregon/scripts/GEEjs/05lt-Optumum-Imager.js
+
+	2) Edit and review script
+
+	3) run script
+
+	4) Run Task
+	
+		asset task
+
+		to drive task
+
 
 #### 3 Generate sample of points to sample both LTOP and LT
 
