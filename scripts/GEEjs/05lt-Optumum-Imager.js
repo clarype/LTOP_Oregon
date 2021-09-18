@@ -36,7 +36,7 @@ var fitIndex = 'NBR'
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 
-Map.addLayer(image,{min:0, max:5000},'cluster')
+//Map.addLayer(image,{min:0, max:5000},'cluster')
 
 ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
@@ -171,9 +171,7 @@ var vertInfo = ltgee.getLTvertStack(ltcol, runParams);
 
 var vertStack = vertInfo.select(['^.*yrs.*$'])
 
-var ltStack = vertStack
-  //.addBands(rmse)
-  .addBands(fittied)
+var ltStack = fittied
   //.addBands(nbrSource)
   .round()
   .toShort()
@@ -181,15 +179,15 @@ var ltStack = vertStack
   //.unmask(-9999);
 //Map.addLayer(ltStack)
 
-//Map.addLayer(fittied,{},'getFittedData')
+Map.addLayer(fittied,{},'getFittedData')
 
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 Export.image.toAsset({
   image: ltStack,
-  description: 'LTOP_Oregon_image_withVertYrs_'+fitIndex,
-  assetId: 'LTOP_Oregon_image_withVertYrs_'+fitIndex,
+  description: 'LTOP_Oregon_image_'+fitIndex,
+  assetId: 'LTOP_Oregon_image_'+fitIndex,
   region: aoi,
   scale: 30,
   maxPixels: 10000000000000
@@ -199,9 +197,9 @@ Export.image.toAsset({
 /////////////////////////////////////////////////////////
 Export.image.toDrive({
         image:ltStack, 
-        description: 'LTOP_Oregon_image_withVertYrs_'+fitIndex, 
-        folder:'LTOP_Oregon_image_withVertYrs_'+fitIndex, 
-        fileNamePrefix: "LTOP_Oregon_image_withVertYrs_"+fitIndex, 
+        description: 'LTOP_Oregon_image_'+fitIndex, 
+        folder:'LTOP_Oregon_image_'+fitIndex, 
+        fileNamePrefix: "LTOP_Oregon_image_"+fitIndex, 
         region:aoi, 
         scale:30, 
         crs:"EPSG:5070",

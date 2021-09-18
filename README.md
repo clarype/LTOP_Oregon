@@ -532,7 +532,7 @@ referance data to the classification of a NLCD dataset. This classification meat
 traditional LandTrendr dataset. Then the two classified images will be compared to the source 
 NLCD to see which, if any, have better performance.   
 
-#### 1 Generate Triditional LandTrendr Run with four indices TCB TCG TCW NBR
+#### 1 Generate Triditional LandTrendr Run with four indices TCB TCG TCW NBR B5 
 
 	1. script local location
 
@@ -552,7 +552,7 @@ NLCD to see which, if any, have better performance.
 
 
   
-#### 2 Generate LTOP in other indices TCW TCG TCB NBR
+#### 2 Generate LTOP in other indices TCW TCG TCB NBR and B5
 
 	1) script location
 
@@ -568,7 +568,8 @@ NLCD to see which, if any, have better performance.
 
 		to drive task
 
+#### 3 Move Gee data to Islay (both LTOP and LT)
 
-#### 3 Generate sample of points to sample both LTOP and LT
+#### 4 Generate sample of points to sample both LTOP and LT
 
-#### 4 Sample each data-set LTOP and LT separately creating two vector data-set samples (each sample set will be a part of the training data for each classification) 
+#### 5 Sample each data-set LTOP and LT separately creating two vector data-set samples (each sample set will be a part of the training data for each classification) 
