@@ -570,6 +570,14 @@ NLCD to see which, if any, have better performance.
 
 #### 3 Move Gee data to Islay (both LTOP and LT)
 
+	1) LTOP
+
+		B5 TCW NBR
+
+	2) LT
+
+		B5 TCB TCG TCW NBR
+
 #### 4 Generate sample of points to sample both LTOP and LT
 
 #### 5 Sample each data-set LTOP and LT separately creating two vector data-set samples (each sample set will be a part of the training data for each classification) 
