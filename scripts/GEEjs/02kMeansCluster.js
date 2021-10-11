@@ -11,28 +11,17 @@
 // website: https://github.com/eMapR/LT-GEE
 
 
-//////////////////////////////////////////////////////////
 //////////////////Import Modules ////////////////////////////
-////////////////////////// /////////////////////////////
-
 var ltgee = require('users/emaprlab/public:LT-data-download/LandTrendr_V2.4.js'); 
 
-//////////////////////////////////////////////////////////
 /////////////////////Cambodia vector////////////////////////////
-////////////////////////// /////////////////////////////
-
 //Centers the map on spatial features 
 var aoi = ee.FeatureCollection("TIGER/2018/States").filterMetadata("NAME","equals","Oregon").geometry().buffer(5000);
 
 Map.centerObject(aoi)
-Map.addLayer(aoi)
+//Map.addLayer(aoi)
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
-//////////////////////////////////////////////////////////
 ////////////////////params//////////////////////////
-////////////////////////// /////////////////////////////
-
 var startYear = 1999; 
 var endYear = 2020; 
 var startDate = '06-20'; 
@@ -41,11 +30,7 @@ var masked = ['cloud', 'shadow', 'snow'] // Image masking options ie cloud optio
 var folder = "LTOP_Oregon_Kmeans_v1" 
 var description = "Kmeans_v1"
 
-
-/////////////////////////////////////////////////////////
 ////////////////////////Landsat Composites///////////////////////////////
-/////////////////////////////////////////////////////////
-
 var dummyCollection = ee.ImageCollection([ee.Image([0,0,0,0,0,0]).mask(ee.Image(0))]);
 
 var getCombinedSRcollection20 = ltgee.getCombinedSRcollection(2020, startDate, endDate, aoi, masked);
@@ -78,45 +63,30 @@ var medaic00 = medoidMosaic(getCombinedSRcollection00, dummyCollection)
 
 var LandsatComposites = medaic20.addBands(medaic10).addBands(medaic00)
 
-//////////////////////////////////////////////////////////
 ////////////////////SNIC/////////////////////////////
-///////////////////////////////////////////////////////
-
 var snicImagey = ee.Algorithms.Image.Segmentation.SNIC({
   image: LandsatComposites,
   size: 10, //changes the number and size of patches 
   compactness: 1, //degrees of irregularity of the patches from a square 
   }).clip(aoi);
   
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//////////////////////////////////////////////////////////
 /////////////////10k sample ////////////////////////////STEP 2
-///////////////////////////////////////////////////////
-
 var sample75k = ee.FeatureCollection("users/emaprlab/03_snic_seed_pixel_points_attributted_random_subset_75k");
 Map.addLayer(sample75k)
 print(sample75k.first())
-//////////////////////////////////////////////////////////
-////////////////////SNIC/////////////////////////////
-///////////////////////////////////////////////////////
 
+////////////////////SNIC/////////////////////////////
 var patchRepsMean = snicImagey.select(["seeds", "clusters",  "B1_mean", "B2_mean",  "B3_mean",  "B4_mean",  "B5_mean",  "B7_mean",  "B1_1_mean",  "B2_1_mean",  "B3_1_mean",  "B4_1_mean",  "B5_1_mean","B7_1_mean",  "B1_2_mean",  "B2_2_mean",  "B3_2_mean",  "B4_2_mean",  "B5_2_mean",  "B7_2_mean"]);
 
 var patchRepSeeds = snicImagey.select(['seeds']);
 
-///////////////////////////////////////////////////////
 ///////Select singel pixel from each patch/////////////
-///////////////////////////////////////////////////////
 print(patchRepsMean.bandNames())
 var SNIC_means_seed = patchRepSeeds.multiply(patchRepsMean).select(["B1_mean", "B2_mean",  "B3_mean",  "B4_mean",  "B5_mean",  "B7_mean",  "B1_1_mean",  "B2_1_mean",  "B3_1_mean",  "B4_1_mean",  "B5_1_mean","B7_1_mean",  "B1_2_mean",  "B2_2_mean",  "B3_2_mean",  "B4_2_mean",  "B5_2_mean",  "B7_2_mean"],["seed__3",  "seed__4",  "seed__5",  "seed__6",  "seed__7",  "seed__8",  "seed__9",  "seed__10",  "seed__11",  "seed__12","seed__13",  "seed__14",  "seed__15",  "seed__16",  "seed__17",  "seed__18",  "seed__19", "seed__20"])//.reproject({  crs: 'EPSG:4326',  scale: 30});//.clip(aoi)
 var SNIC_means_image = patchRepsMean.select(["B1_mean", "B2_mean",  "B3_mean",  "B4_mean",  "B5_mean",  "B7_mean",  "B1_1_mean",  "B2_1_mean",  "B3_1_mean",  "B4_1_mean",  "B5_1_mean","B7_1_mean",  "B1_2_mean",  "B2_2_mean",  "B3_2_mean",  "B4_2_mean",  "B5_2_mean",  "B7_2_mean"],["seed__3",  "seed__4",  "seed__5",  "seed__6",  "seed__7",  "seed__8",  "seed__9",  "seed__10",  "seed__11",  "seed__12","seed__13",  "seed__14",  "seed__15",  "seed__16",  "seed__17",  "seed__18",  "seed__19", "seed__20"])//.reproject({  crs: 'EPSG:4326',  scale: 30});//.clip(aoi)
 print(SNIC_means_image.bandNames())
 
-
-//////////////////////////////////////////////////////////
 /////////////////Train////////////////////////////
-///////////////////////////////////////////////////////
-
 var training = ee.Clusterer.wekaCascadeKMeans(5000,5001).train({ 
   features: sample75k, 
   //inputProperties:["B1_mean", "B2_mean",  "B3_mean",  "B4_mean",  "B5_mean",  "B7_mean",  "B1_1_mean",  "B2_1_mean",  "B3_1_mean",  "B4_1_mean",  "B5_1_mean","B7_1_mean",  "B1_2_mean",  "B2_2_mean",  "B3_2_mean",  "B4_2_mean",  "B5_2_mean",  "B7_2_mean"]
@@ -124,19 +94,11 @@ var training = ee.Clusterer.wekaCascadeKMeans(5000,5001).train({
 });
 print(training)
 
-// // // //////////////////////////////////
 // // // //////////////Clusterer//////////////
-// // // //////////////////////////////////
-
 var clusterImage = SNIC_means_image.cluster(training).clip(aoi);
 var clusterSeed = SNIC_means_seed.cluster(training).clip(aoi);
-// Map.addLayer(clusterSeed)
-// //Map.addLayer(clusterImage,{},'clusterImage')
 
-
-// //////////////////////////////////
 // //////////////Kmeans cluster Export//////////////
-// //////////////////////////////////
       
 // Export.image.toDrive({
 //         image:clusterImage, 
@@ -148,9 +110,6 @@ var clusterSeed = SNIC_means_seed.cluster(training).clip(aoi);
 //         maxPixels: 1e13 
 //       })   
   
-
-      
-      
 Export.image.toAsset({
         image:clusterImage, 
         description: description, 
@@ -159,7 +118,6 @@ Export.image.toAsset({
         scale:30, 
         maxPixels: 1e13 
       })   
-      
       
 Export.image.toDrive({
         image:clusterSeed, 
@@ -170,5 +128,3 @@ Export.image.toDrive({
         scale:30, 
         maxPixels: 1e13 
       })   
-
-

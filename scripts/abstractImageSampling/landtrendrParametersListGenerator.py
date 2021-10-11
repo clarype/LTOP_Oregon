@@ -1,7 +1,5 @@
-#imports 
 
-
-# This script is designed to create a list of landTrendr parameters varations. The parameter varations 
+# This program is designed to create a list of landTrendr parameters varations. The parameter varations 
 # are drawn from lists of parameter values.
 
 
@@ -26,16 +24,11 @@ for seg in Segments:
                 list.append(newlist)
                 print('newlist', newlist)
 
-
-
-
 # make empty list. this will parameters appended to it
 parameterDicList = []
 
-
 # iterator 
 for subList in list:
-
 
 # asign each parameter to template 
     ltParamTemplate = "{timeSeries: ee.ImageCollection([]), maxSegments: "+str(subList[0])+" , spikeThreshold: "+str(subList[1])+", vertexCountOvershoot: 3, preventOneYearRecovery: true, recoveryThreshold: "+str(subList[2])+", pvalThreshold: "+str(subList[3])+", bestModelProportion: 0.25, minObservationsNeeded: "+str(subList[0])+" }"
@@ -47,7 +40,7 @@ for subList in list:
 print(parameterDicList)
 
 # add list to text file
+#export file
 with open("./LT_parameter_varations_list_dic_144.txt", "w") as output:
     output.write(str(parameterDicList))
 
-#export file

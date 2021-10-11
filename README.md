@@ -572,12 +572,26 @@ NLCD to see which, if any, have better performance.
 
 	1) LTOP
 
-		B5 TCW NBR
+		B5 TCB TCG TCW NBR
 
 	2) LT
 
 		B5 TCB TCG TCW NBR
 
-#### 4 Generate sample of points to sample both LTOP and LT
+#### 4 Get Reference data (NLCD)
 
-#### 5 Sample each data-set LTOP and LT separately creating two vector data-set samples (each sample set will be a part of the training data for each classification) 
+	I got the USGS NLCD for 2016 
+
+		/vol/v1/proj/LTOP_Oregon/rasters/06_USGS_NLCD_2016/usgs_nlcd_oregon_2016_5070.tif
+
+
+#### 5 get 2016 datasets from all LTOP images and merge them into a 2016 ltop raster stack 
+
+ 	
+#### 6 get 2016 datasets from all LT images and merge them into a 2016 lt raster stack
+ 
+
+#### 7 Generate sample of points to sample both LTOP and LT
+
+	
+#### 8 Sample each data-set LTOP and LT separately creating two vector data-set samples (each sample set will be a part of the training data for each classification) 

@@ -1,12 +1,6 @@
-from osgeo import gdal
-import osgeo.ogr
-import osgeo.osr
-import rasterio
-import pandas as pd
-import numpy as np
 
 '''
-This scripts loads in a CSV and converts it into a "abstract image collection".
+This program loads in a CSV and converts it into abstract images.
 
 Given this image is "abstract" in that the information is not-spatial, the output
 image will appear near the origin of a project coordinate system.
@@ -30,7 +24,17 @@ Script assumptions:
        For example, 5000 points could be distibuted into 100 rows and 50 columns
 
 '''
+from osgeo import gdal
+import osgeo.ogr
+import osgeo.osr
+import rasterio
+import pandas as pd
+import numpy as np
 
+'''
+This function gets the profile and projection for the export. there are 3 parameters: out_rows, out_cols, num_bands 
+all of which are intgers. 
+'''
 def create_rasterio_profile(out_rows, out_cols, num_bands=5):
     '''Create the rasterio export profile. '''
 
