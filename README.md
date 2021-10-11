@@ -587,10 +587,52 @@ NLCD to see which, if any, have better performance.
 
 #### 5 get 2016 datasets from all LTOP images and merge them into a 2016 ltop raster stack 
 
+	when do the dataset start and what band is 2016?
+
+		startYear = 1999
+
+        	2016 is band 18
+
+	make vrt raster for each of the LTOP rasters stacks 
+
+	make vrt raster for each dataset
  	
+		ls -d "$PWD"/*.tif > tcw_raster_list.txt
+
+		gdalbuildvrt -input_file_list *_list.txt LTOP_Oregon_TCW.vrt	
+
+	get band 18 for each of the LTOP indices and merge them
+
+		done	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_B5/LTOP_Oregon_B5.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_B5/LTOP_Oregon_B5_2016.tif
+		done	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_NBR/LTOP_Oregon_NBR.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_NBR/LTOP_Oregon_NBR_2016.tif
+		done 	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCB/LTOP_Oregon_TCB.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCB/LTOP_Oregon_TCB_2016.tif
+		done 	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCG/LTOP_Oregon_TCG.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCG/LTOP_Oregon_TCG_2016.tif
+		done 	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCW/LTOP_Oregon_TCW.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCW/LTOP_Oregon_TCW_2016.tif
+
+
 #### 6 get 2016 datasets from all LT images and merge them into a 2016 lt raster stack
  
+	when do the dataset start and what band is 2016?
 
+		startYear = 1999 
+
+		2016 is band 18
+
+	make vrt raster for each of the LTOP rasters stacks 
+
+		ls -d "$PWD"/*.tif > tcw_raster_list.txt
+
+		gdalbuildvrt -input_file_list *_list.txt LT_Oregon_TCW.vrt	
+
+	get band 18 for each of the LT indices and merge them
+
+		done	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/b5/LT_Oregon_B5.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/b5/LT_Oregon_B5_2016.tif
+		done	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/nbr/LT_Oregon_NBR.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/nbr/LT_Oregon_NBR_2016.tif
+		done	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcb/LT_Oregon_TCB.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcb/LT_Oregon_TCB_2016.tif 
+		done	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcg/LT_Oregon_TCG.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcg/LT_Oregon_TCG_2016.tif
+		done	gdal_translate -b 18 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcw/LT_Oregon_TCW.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcw/LT_Oregon_TCW_2016.tif
+
+	
 #### 7 Generate sample of points to sample both LTOP and LT
 
 	
