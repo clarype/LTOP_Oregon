@@ -649,5 +649,12 @@ NLCD to see which, if any, have better performance.
 	
 #### 7 Generate sample of points to sample both LTOP and LT
 
+	calculate the what sample size is needed
+
+		get NLCD pixel class counts
+
+		total pixels :291888761
+		{11: 5916526, 12: 39078, 21: 4497750, 22: 2215526, 23: 1354569, 24: 480052, 31: 1897382, 41: 720548, 42: 92977629, 43: 6783384, 52: 97276198, 71: 48705343, 81: 9056400, 82: 14139759, 90: 1834268, 95: 3994349}
+ 
 	
 #### 8 Sample each data-set LTOP and LT separately creating two vector data-set samples (each sample set will be a part of the training data for each classification) 
