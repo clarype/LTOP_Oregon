@@ -618,7 +618,6 @@ NLCD to see which, if any, have better performance.
 
 			Done 	gdal_merge.py -separate -o ./LTOP_Oregon_NLCD_b5_NBR_TCB_TCG_TCW_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/06_USGS_NLCD_2016/usgs_nlcd_oregon_2016_5070_int16.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_B5/LTOP_Oregon_B5_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_NBR/LTOP_Oregon_NBR_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCB/LTOP_Oregon_TCB_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCG/LTOP_Oregon_TCG_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCW/LTOP_Oregon_TCW_2016.tif 
 
-
 #### 6 get 2016 datasets from all LT images and merge them into a 2016 lt raster stack
  
 	when do the dataset start and what band is 2016?
@@ -646,6 +645,56 @@ NLCD to see which, if any, have better performance.
 
                         Done 	gdal_merge.py -separate -o ./LT_Oregon_NLCD_b5_NBR_TCB_TCG_TCW_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/06_USGS_NLCD_2016/usgs_nlcd_oregon_2016_5070_int16.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/b5/LT_Oregon_B5_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/nbr/LT_Oregon_NBR_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcb/LT_Oregon_TCB_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcg/LT_Oregon_TCG_2016.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcw/LT_Oregon_TCW_2016.tif
 
+
+#### 7 get 2019 datasets from all LTOP images and merge them into a 2019 ltop raster stack 
+
+	when do the dataset start and what band is 2019?
+
+		startYear = 1999
+
+        	2019 is band 21
+
+	make vrt raster for each of the LTOP rasters stacks 
+
+		done in step 5
+
+	get band 21 for each of the LTOP indices and merge them
+
+		done	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_B5/LTOP_Oregon_B5.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_B5/LTOP_Oregon_B5_2019.tif
+		done	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_NBR/LTOP_Oregon_NBR.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_NBR/LTOP_Oregon_NBR_2019.tif
+		done 	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCB/LTOP_Oregon_TCB.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCB/LTOP_Oregon_TCB_2019.tif
+		done 	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCG/LTOP_Oregon_TCG.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCG/LTOP_Oregon_TCG_2019.tif
+		done 	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCW/LTOP_Oregon_TCW.vrt /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCW/LTOP_Oregon_TCW_2019.tif
+
+		merge with NLCD 
+
+			Done 	gdal_merge.py -separate -o ./LTOP_Oregon_NLCD_b5_NBR_TCB_TCG_TCW_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/06_USGS_NLCD_2019/usgs_nlcd_oregon_2019_5070_int19.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_B5/LTOP_Oregon_B5_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_NBR/LTOP_Oregon_NBR_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCB/LTOP_Oregon_TCB_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCG/LTOP_Oregon_TCG_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/04_LTOP_Imagery/LTOP_Oregon_Image_TCW/LTOP_Oregon_TCW_2019.tif 
+
+#### 8 get 2019 datasets from all LT images and merge them into a 2019 lt raster stack
+
+	when do the dataset start and what band is 2019?  
+		
+		startYear = 1999 
+
+		2019 is band 21
+
+	make vrt raster for each of the LTOP rasters stacks 
+
+		done in step 6
+
+	get band 21 for each of the LT indices and merge them
+
+		done	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/b5/LT_Oregon_B5.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/b5/LT_Oregon_B5_2019.tif
+		done	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/nbr/LT_Oregon_NBR.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/nbr/LT_Oregon_NBR_2019.tif
+		done	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcb/LT_Oregon_TCB.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcb/LT_Oregon_TCB_2019.tif 
+		done	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcg/LT_Oregon_TCG.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcg/LT_Oregon_TCG_2019.tif
+		done	gdal_translate -b 21 /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcw/LT_Oregon_TCW.vrt /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcw/LT_Oregon_TCW_2019.tif
+
+		merge with NLCD
+
+                        Done 	gdal_merge.py -separate -o ./LT_Oregon_NLCD_b5_NBR_TCB_TCG_TCW_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/06_USGS_NLCD_2019/usgs_nlcd_oregon_2019_5070_int19.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/b5/LT_Oregon_B5_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/nbr/LT_Oregon_NBR_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcb/LT_Oregon_TCB_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcg/LT_Oregon_TCG_2019.tif /vol/v1/proj/LTOP_Oregon/rasters/05_LT_Orig_for_validation/tcw/LT_Oregon_TCW_2019.tif
+
+
 	
 #### 7 Generate sample of points to sample both LTOP and LT
 
@@ -655,6 +704,15 @@ NLCD to see which, if any, have better performance.
 
 		total pixels :291888761
 		{11: 5916526, 12: 39078, 21: 4497750, 22: 2215526, 23: 1354569, 24: 480052, 31: 1897382, 41: 720548, 42: 92977629, 43: 6783384, 52: 97276198, 71: 48705343, 81: 9056400, 82: 14139759, 90: 1834268, 95: 3994349}
- 
+
+	(()/())^2 
 	
-#### 8 Sample each data-set LTOP and LT separately creating two vector data-set samples (each sample set will be a part of the training data for each classification) 
+
+!! Crazy Thought how about Neural Networks??? I know very little about them and they seem pop right now. I cam across a cool look workflow thing that may have all my awnsers.
+
+https://towardsdatascience.com/neural-network-for-satellite-data-classification-using-tensorflow-in-python-a13bcf38f3e1
+
+but I still need to set up my new predictors for 2019.
+
+
+
